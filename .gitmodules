@@ -1,3 +1,6 @@
 [submodule "HackerRank-Python"]
 	path = HackerRank-Python
 	url = https://github.com/MohammadGhanaym/HackerRank-Python.git
+[submodule "Python-Leetcode"]
+	path = Python-Leetcode
+	url = https://github.com/MohammadGhanaym/Python-Leetcode.git
