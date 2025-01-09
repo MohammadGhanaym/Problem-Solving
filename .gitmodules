@@ -1,0 +1,3 @@
+[submodule "HackerRank-Python"]
+	path = HackerRank-Python
+	url = https://github.com/MohammadGhanaym/HackerRank-Python.git
