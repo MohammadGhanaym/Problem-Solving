@@ -4,3 +4,6 @@
 [submodule "Python-Leetcode"]
 	path = Python-Leetcode
 	url = https://github.com/MohammadGhanaym/Python-Leetcode.git
+[submodule "Python-Codeforces"]
+	path = Python-Codeforces
+	url = https://github.com/MohammadGhanaym/Python---Codeforces.git
