@@ -60,7 +60,7 @@
 <li><a href="#Gas_Station">Gas_Station</a></li>
 <li><a href="#First_Bad_Version">First_Bad_Version</a></li>
 <li><a href="#Intersection_of_Two_Arrays">Intersection_of_Two_Arrays</a></li>
-<li><a href="#Write_Here">Write_Here</a></li>
+<li><a href="#Remove_Linked_List_Elements">Remove_Linked_List_Elements</a></li>
 <li><a href="#Write_Here">Write_Here</a></li>
 <li><a href="#Write_Here">Write_Here</a></li>
 <li><a href="#Write_Here">Write_Here</a></li>
@@ -81,13 +81,13 @@
 input().replace(' ', '_')
 ```
 
-     Intersection of Two Arrays
+     Remove Linked List Elements
     
 
 
 
 
-    'Intersection_of_Two_Arrays'
+    'Remove_Linked_List_Elements'
 
 
 
@@ -2941,9 +2941,75 @@ intersection(nums1, nums2)
 
 
 
+<a id='Remove_Linked_List_Elements'></a>
+### Remove_Linked_List_Elements
+
+
+```python
+def removeElements(head: ListNode, val: int) -> ListNode:
+    if head is None:
+        return head
+
+    head.next = removeElements(head.next, val)
+    
+    return head.next if head.val == val else head
+```
+
+
+```python
+head = build_linked_list_from_list([1,2,6,3,4,5,6])
+head = removeElements(head, 6)
+display_linked_list(head)
+```
+
+    1 -> 2 -> 3 -> 4 -> 5
+    
+
 
 ```python
 
+```
+
+
+```python
+<a id='Refer_to'></a>
+### Refer_to
+```
+
+
+```python
+<a id='Refer_to'></a>
+### Refer_to
+```
+
+
+```python
+<a id='Refer_to'></a>
+### Refer_to
+```
+
+
+```python
+<a id='Refer_to'></a>
+### Refer_to
+```
+
+
+```python
+<a id='Refer_to'></a>
+### Refer_to
+```
+
+
+```python
+<a id='Refer_to'></a>
+### Refer_to
+```
+
+
+```python
+<a id='Refer_to'></a>
+### Refer_to
 ```
 
 
