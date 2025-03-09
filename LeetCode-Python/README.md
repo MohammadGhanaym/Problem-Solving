@@ -61,8 +61,8 @@
 <li><a href="#First_Bad_Version">First_Bad_Version</a></li>
 <li><a href="#Intersection_of_Two_Arrays">Intersection_of_Two_Arrays</a></li>
 <li><a href="#Remove_Linked_List_Elements">Remove_Linked_List_Elements</a></li>
-<li><a href="#Write_Here">Write_Here</a></li>
-<li><a href="#Write_Here">Write_Here</a></li>
+<li><a href="#Power_of_Two">Power_of_Two</a></li>
+<li><a href="#Concatenation_of_Array">Concatenation_of_Array</a></li>
 <li><a href="#Write_Here">Write_Here</a></li>
 <li><a href="#Write_Here">Write_Here</a></li>
 <li><a href="#Write_Here">Write_Here</a></li>
@@ -81,13 +81,13 @@
 input().replace(' ', '_')
 ```
 
-     Remove Linked List Elements
+     1929. Concatenation of Array
     
 
 
 
 
-    'Remove_Linked_List_Elements'
+    '1929._Concatenation_of_Array'
 
 
 
@@ -2965,22 +2965,65 @@ display_linked_list(head)
     1 -> 2 -> 3 -> 4 -> 5
     
 
+<a id='Power_of_Two'></a>
+### Power_of_Two
+
 
 ```python
+class Solution:
+    def isPowerOfTwo(self, n: int) -> bool:
+        if n <= 0:
+            return False
+        if n == 1:
+            return True
+        return (n % 2 == 0) and self.isPowerOfTwo(n // 2)
+```
 
+<a id='Concatenation_of_Array'></a>
+### Concatenation_of_Array
+
+
+```python
+def getConcatenation(nums):
+    ans = []
+    for i in range(2):
+        for n in nums:
+            ans.append(n)
+    return ans
 ```
 
 
 ```python
-<a id='Refer_to'></a>
-### Refer_to
+nums = [1,2,1]
+getConcatenation(nums)
+```
+
+
+
+
+    [1, 2, 1, 1, 2, 1]
+
+
+
+
+```python
+def isAnagram(s: str, t: str) -> bool:
+    return sorted(s) == sorted(t)
 ```
 
 
 ```python
-<a id='Refer_to'></a>
-### Refer_to
+s = 'nour'
+t = 'roun'
+isAnagram(s, t)
 ```
+
+
+
+
+    True
+
+
 
 
 ```python
