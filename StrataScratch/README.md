@@ -1,7 +1,7 @@
 ## Table of Contents
 <li><a href="#Unique_Users_Per_Client_Per_Month">Unique_Users_Per_Client_Per_Month</a></li>
 <li><a href="#Number_of_Shipments_Per_Month">Number_of_Shipments_Per_Month</a></li>
-<li><a href="#Write_Here">Write_Here</a></li>
+<li><a href="#Most_Lucrative_Products">Most_Lucrative_Products</a></li>
 <li><a href="#Write_Here">Write_Here</a></li>
 <li><a href="#Write_Here">Write_Here</a></li>
 <li><a href="#Write_Here">Write_Here</a></li>
@@ -21,13 +21,13 @@
 input().replace(' ', '_')
 ```
 
-     Number of Shipments Per Month
+     Most Lucrative Products
     
 
 
 
 
-    'Number_of_Shipments_Per_Month'
+    'Most_Lucrative_Products'
 
 
 
@@ -71,10 +71,27 @@ FROM amazon_shipment
 GROUP BY FORMAT(shipment_date, 'yyyy-MM')
 ```
 
+<a id='Most_Lucrative_Products'></a>
+# Most_Lucrative_Products
+
 
 ```python
-<a id='Refer_to'></a>
-# Refer_to
+# Import your libraries
+import pandas as pd
+
+# Start writing code
+
+orders_first_half = online_orders[online_orders['date_sold'].between('2022-01-01', '2022-06-30')]
+orders_first_half['revenue'] = online_orders['units_sold'] * online_orders['cost_in_dollars']
+orders_first_half.groupby('product_id' ,as_index=False)['revenue'].sum().sort_values(by='revenue', ascending=False).iloc[:5, :]
+```
+
+```sql
+SELECT TOP(5) product_id, SUM(units_sold * cost_in_dollars) AS revenue
+FROM online_orders
+WHERE date_sold BETWEEN '2022-01-01' AND '2022-06-30'
+GROUP BY product_id
+ORDER BY revenue DESC
 ```
 
 
