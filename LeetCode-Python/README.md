@@ -63,7 +63,7 @@
 <li><a href="#Remove_Linked_List_Elements">Remove_Linked_List_Elements</a></li>
 <li><a href="#Power_of_Two">Power_of_Two</a></li>
 <li><a href="#Concatenation_of_Array">Concatenation_of_Array</a></li>
-<li><a href="#Write_Here">Write_Here</a></li>
+<li><a href="#Replace_Elements_with_Greatest_Element_on_Right_Side">Replace_Elements_with_Greatest_Element_on_Right_Side</a></li>
 <li><a href="#Write_Here">Write_Here</a></li>
 <li><a href="#Write_Here">Write_Here</a></li>
 <li><a href="#Write_Here">Write_Here</a></li>
@@ -81,13 +81,13 @@
 input().replace(' ', '_')
 ```
 
-     1929. Concatenation of Array
+     1299. Replace Elements with Greatest Element on Right Side
     
 
 
 
 
-    '1929._Concatenation_of_Array'
+    '1299._Replace_Elements_with_Greatest_Element_on_Right_Side'
 
 
 
@@ -3005,31 +3005,66 @@ getConcatenation(nums)
 
 
 
+<a id='Replace_Elements_with_Greatest_Element_on_Right_Side'></a>
+### Replace_Elements_with_Greatest_Element_on_Right_Side
+
 
 ```python
-def isAnagram(s: str, t: str) -> bool:
-    return sorted(s) == sorted(t)
+def replaceElements(arr: list[int]) -> list[int]:
+    rightMax = -1
+    for i in range(len(arr) - 1, -1, -1):
+        newMax = max(rightMax, arr[i])
+        arr[i] = rightMax
+        rightMax = newMax
+    return arr
 ```
 
 
 ```python
-s = 'nour'
-t = 'roun'
-isAnagram(s, t)
+arr = [17,18,5,4,6,1]
+replaceElements(arr)
 ```
 
 
 
 
-    True
+    [18, 6, 6, 6, 1, -1]
 
 
 
 
 ```python
-<a id='Refer_to'></a>
-### Refer_to
+def get_idxmax(start, arr):
+    idx_max = start
+    for idx in range(start + 1, len(arr)):
+        if arr[idx] > arr[idx_max]:
+            idx_max = idx
+    return idx_max
+    
+def replaceElements(arr: list[int]) -> list[int]:
+    idx = 0
+    while idx < len(arr) - 1:
+        # get max value index
+        max_index = get_idxmax(idx + 1, arr)
+        # replace all values before max value with max value
+        arr[idx:max_index] = [arr[max_index]] * (max_index - idx)
+        idx = max_index
+    arr[-1] = -1
+    return arr
 ```
+
+
+```python
+arr = [17,18,5,4,6,1]
+replaceElements(arr)
+```
+
+
+
+
+    [18, 6, 6, 6, 1, -1]
+
+
 
 
 ```python
