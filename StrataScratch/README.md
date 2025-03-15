@@ -2,8 +2,8 @@
 <li><a href="#Unique_Users_Per_Client_Per_Month">Unique_Users_Per_Client_Per_Month</a></li>
 <li><a href="#Number_of_Shipments_Per_Month">Number_of_Shipments_Per_Month</a></li>
 <li><a href="#Most_Lucrative_Products">Most_Lucrative_Products</a></li>
-<li><a href="#Write_Here">Write_Here</a></li>
-<li><a href="#Write_Here">Write_Here</a></li>
+<li><a href="#Number_Of_Bathrooms_And_Bedrooms">Number_Of_Bathrooms_And_Bedrooms</a></li>
+<li><a href="#MacBookPro_User_Event_Count">MacBookPro_User_Event_Count</a></li>
 <li><a href="#Write_Here">Write_Here</a></li>
 <li><a href="#Write_Here">Write_Here</a></li>
 <li><a href="#Write_Here">Write_Here</a></li>
@@ -21,13 +21,13 @@
 input().replace(' ', '_')
 ```
 
-     Most Lucrative Products
+     MacBookPro User Event Count
     
 
 
 
 
-    'Most_Lucrative_Products'
+    'MacBookPro_User_Event_Count'
 
 
 
@@ -92,6 +92,87 @@ FROM online_orders
 WHERE date_sold BETWEEN '2022-01-01' AND '2022-06-30'
 GROUP BY product_id
 ORDER BY revenue DESC
+```
+
+<a id='Number_Of_Bathrooms_And_Bedrooms'></a>
+# Number_Of_Bathrooms_And_Bedrooms
+
+
+```python
+airbnb_search_details.groupby(['city', 'property_type'], as_index=False).agg(n_bedrooms_avg = ('bedrooms', 'mean'),
+                                                             n_bathrooms_avg = ('bathrooms', 'mean'))
+```
+
+```SQL
+SELECT city, 
+       property_type, 
+       AVG(CAST(bathrooms AS FLOAT)) AS n_bathrooms_avg, 
+       AVG(CAST(bedrooms AS FLOAT)) AS n_bedrooms_avg
+FROM airbnb_search_details
+GROUP BY city, property_type
+```
+
+<a id='MacBookPro_User_Event_Count'></a>
+# MacBookPro_User_Event_Count
+
+
+```python
+# Import your libraries
+import pandas as pd
+
+# Start writing code
+mackbookpro_users = playbook_events[playbook_events['device'] == 'macbook pro']
+mackbookpro_users.event_name.value_counts().reset_index(name='event_count').rename(columns={'index': 'event_name'})
+```
+
+```sql
+select event_name, COUNT(*) AS event_count
+FROM playbook_events
+WHERE device = 'macbook pro'
+GROUP BY event_name
+ORDER BY event_count DESC
+```
+
+
+```python
+<a id='Refer_to'></a>
+# Refer_to
+```
+
+
+```python
+<a id='Refer_to'></a>
+# Refer_to
+```
+
+
+```python
+<a id='Refer_to'></a>
+# Refer_to
+```
+
+
+```python
+<a id='Refer_to'></a>
+# Refer_to
+```
+
+
+```python
+<a id='Refer_to'></a>
+# Refer_to
+```
+
+
+```python
+<a id='Refer_to'></a>
+# Refer_to
+```
+
+
+```python
+<a id='Refer_to'></a>
+# Refer_to
 ```
 
 
