@@ -64,8 +64,8 @@
 <li><a href="#Power_of_Two">Power_of_Two</a></li>
 <li><a href="#Concatenation_of_Array">Concatenation_of_Array</a></li>
 <li><a href="#Replace_Elements_with_Greatest_Element_on_Right_Side">Replace_Elements_with_Greatest_Element_on_Right_Side</a></li>
-<li><a href="#Write_Here">Write_Here</a></li>
-<li><a href="#Write_Here">Write_Here</a></li>
+<li><a href="#Is_Subsequence">Is_Subsequence</a></li>
+<li><a href="#Length_of_Last_Word">Length_of_Last_Word</a></li>
 <li><a href="#Write_Here">Write_Here</a></li>
 <li><a href="#Write_Here">Write_Here</a></li>
 <li><a href="#Write_Here">Write_Here</a></li>
@@ -81,13 +81,13 @@
 input().replace(' ', '_')
 ```
 
-     1299. Replace Elements with Greatest Element on Right Side
+     Length of Last Word
     
 
 
 
 
-    '1299._Replace_Elements_with_Greatest_Element_on_Right_Side'
+    'Length_of_Last_Word'
 
 
 
@@ -3066,17 +3066,88 @@ replaceElements(arr)
 
 
 
+<a id='Is_Subsequence'></a>
+### Is_Subsequence
+
 
 ```python
-<a id='Refer_to'></a>
-### Refer_to
+def isSubsequence(s: str, t: str) -> bool:
+    p1, p2 = 0, 0
+    while p2 < len(t) and p1 < len(s):
+        if s[p1] == t[p2]:
+            p1 += 1
+        p2 += 1
+
+    return (p1 == len(s))
 ```
 
 
 ```python
-<a id='Refer_to'></a>
-### Refer_to
+s = "axc"
+t = "ahbgdc"
+isSubsequence(s, t)
 ```
+
+
+
+
+    False
+
+
+
+<a id='Length_of_Last_Word'></a>
+### Length_of_Last_Word
+
+
+```python
+def lengthOfLastWord(s: str) -> int:
+    l = 0
+    s = s.strip()
+    for i in range(len(s) - 1, -1, -1):
+        if s[i] == ' ':
+            break
+        l += 1
+    return l
+```
+
+
+```python
+s = "Hello World"
+lengthOfLastWord(s)
+```
+
+
+
+
+    5
+
+
+
+
+```python
+def lengthOfLastWord(s: str) -> int:
+    length, idx = 0, len(s) - 1
+    while s[idx] == ' ':
+        idx -= 1
+    while idx >= 0 and s[idx] != ' ':
+        length += 1
+        idx -= 1
+        
+    return length
+```
+
+
+```python
+s = "Hello World"
+lengthOfLastWord(s)
+```
+
+
+
+
+    5
+
+
 
 
 ```python
