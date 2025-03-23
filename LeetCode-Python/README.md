@@ -66,7 +66,7 @@
 <li><a href="#Replace_Elements_with_Greatest_Element_on_Right_Side">Replace_Elements_with_Greatest_Element_on_Right_Side</a></li>
 <li><a href="#Is_Subsequence">Is_Subsequence</a></li>
 <li><a href="#Length_of_Last_Word">Length_of_Last_Word</a></li>
-<li><a href="#Write_Here">Write_Here</a></li>
+<li><a href="#Group_Anagrams">Group_Anagrams</a></li>
 <li><a href="#Write_Here">Write_Here</a></li>
 <li><a href="#Write_Here">Write_Here</a></li>
 <li><a href="#Write_Here">Write_Here</a></li>
@@ -81,13 +81,13 @@
 input().replace(' ', '_')
 ```
 
-     Length of Last Word
+     49. Group Anagrams
     
 
 
 
 
-    'Length_of_Last_Word'
+    '49._Group_Anagrams'
 
 
 
@@ -196,6 +196,18 @@ def twoSum(nums, target):
                 idx2 = idx2 + 1
                 
             continue
+    return []
+```
+
+
+```python
+def twoSum(nums, target):
+    preMap = {}
+    for i, num in enumerate(nums):
+        diff = target - num
+        if diff in preMap:
+            return [preMap[diff], i]
+        preMap[num] = i
     return []
 ```
 
@@ -364,6 +376,18 @@ def longestCommonPrefix(strs):
             break
             
     return prefix
+```
+
+
+```python
+def longestCommonPrefix(strs):
+    longest_prefix = ""
+    for i in range(len(strs[0])):
+        for s in strs[1:]:
+            if i == len(s) or s[i] != strs[0][i]:
+                return longest_prefix
+        longest_prefix += strs[0][i]
+    return longest_prefix
 ```
 
 
@@ -3149,10 +3173,35 @@ lengthOfLastWord(s)
 
 
 
+<a id='Group_Anagrams'></a>
+### Group_Anagrams
+
 
 ```python
-<a id='Refer_to'></a>
-### Refer_to
+def groupAnagrams(strs: list[str]) -> list[list[str]]:
+    angs = dict()
+    for i, val in enumerate([''.join(sorted(s)) for s in strs]):
+        angs[val] = angs.get(val, []) + [strs[i]]
+    return list(angs.values())
+```
+
+
+```python
+strs = ["eat","tea","tan","ate","nat","bat"]
+
+groupAnagrams(strs)
+```
+
+
+
+
+    [['eat', 'tea', 'ate'], ['tan', 'nat'], ['bat']]
+
+
+
+
+```python
+
 ```
 
 
