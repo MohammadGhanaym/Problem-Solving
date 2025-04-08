@@ -5,9 +5,9 @@
 <li><a href="#Big_Countries">Big_Countries</a></li>
 <li><a href="#Article_Views_I">Article_Views_I</a></li>
 <li><a href="#Invalid_Tweets">Invalid_Tweets</a></li>
-<li><a href="#Write_Here">Write_Here</a></li>
-<li><a href="#Write_Here">Write_Here</a></li>
-<li><a href="#Write_Here">Write_Here</a></li>
+<li><a href="#Replace_Employee_ID_With_The_Unique_Identifier">Replace_Employee_ID_With_The_Unique_Identifier</a></li>
+<li><a href="#Product_Sales_Analysis_I">Product_Sales_Analysis_I</a></li>
+<li><a href="#Customer_Who_Visited_but_Did_Not_Make_Any_Transactions">Customer_Who_Visited_but_Did_Not_Make_Any_Transactions</a></li>
 <li><a href="#Write_Here">Write_Here</a></li>
 <li><a href="#Write_Here">Write_Here</a></li>
 
@@ -16,13 +16,13 @@
 input().replace(' ', '_')
 ```
 
-     Invalid Tweets
+     Customer Who Visited but Did Not Make Any Transactions
     
 
 
 
 
-    'Invalid_Tweets'
+    'Customer_Who_Visited_but_Did_Not_Make_Any_Transactions'
 
 
 
@@ -77,34 +77,38 @@ FROM Tweets
 WHERE LEN(content) > 15
 ```
 
-
-```python
-<a id='Refer_to'></a>
-# Refer_to
-```
+<a id='Replace_Employee_ID_With_The_Unique_Identifier'></a>
+# Replace_Employee_ID_With_The_Unique_Identifier
 
 ```sql
-
+SELECT unique_id, name
+FROM Employees e
+LEFT JOIN EmployeeUNI eUNI
+ON e.id = eUNI.id
 ```
 
-
-```python
-<a id='Refer_to'></a>
-# Refer_to
-```
+<a id='Product_Sales_Analysis_I'></a>
+# Product_Sales_Analysis_I
 
 ```sql
-
+/* Write your T-SQL query statement below */
+SELECT product_name, year, price
+FROM Sales s
+INNER JOIN Product p
+ON s.product_id = p.product_id
 ```
 
-
-```python
-<a id='Refer_to'></a>
-# Refer_to
-```
+<a id='Customer_Who_Visited_but_Did_Not_Make_Any_Transactions'></a>
+# Customer_Who_Visited_but_Did_Not_Make_Any_Transactions
 
 ```sql
-
+/* Write your T-SQL query statement below */
+SELECT customer_id, COUNT(*) AS count_no_trans
+FROM Visits v
+LEFT JOIN Transactions t
+ON v.visit_id = t.visit_id
+WHERE t.visit_id IS NULL
+GROUP BY customer_id
 ```
 
 
