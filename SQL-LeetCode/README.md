@@ -8,6 +8,25 @@
 <li><a href="#Replace_Employee_ID_With_The_Unique_Identifier">Replace_Employee_ID_With_The_Unique_Identifier</a></li>
 <li><a href="#Product_Sales_Analysis_I">Product_Sales_Analysis_I</a></li>
 <li><a href="#Customer_Who_Visited_but_Did_Not_Make_Any_Transactions">Customer_Who_Visited_but_Did_Not_Make_Any_Transactions</a></li>
+<li><a href="#Rising_Temperature">Rising_Temperature</a></li>
+<li><a href="#Write_Here">Write_Here</a></li>
+<li><a href="#Write_Here">Write_Here</a></li>
+<li><a href="#Write_Here">Write_Here</a></li>
+<li><a href="#Write_Here">Write_Here</a></li>
+<li><a href="#Write_Here">Write_Here</a></li>
+<li><a href="#Write_Here">Write_Here</a></li>
+<li><a href="#Write_Here">Write_Here</a></li>
+<li><a href="#Write_Here">Write_Here</a></li>
+<li><a href="#Write_Here">Write_Here</a></li>
+<li><a href="#Write_Here">Write_Here</a></li>
+<li><a href="#Write_Here">Write_Here</a></li>
+<li><a href="#Write_Here">Write_Here</a></li>
+<li><a href="#Write_Here">Write_Here</a></li>
+<li><a href="#Write_Here">Write_Here</a></li>
+<li><a href="#Write_Here">Write_Here</a></li>
+<li><a href="#Write_Here">Write_Here</a></li>
+<li><a href="#Write_Here">Write_Here</a></li>
+<li><a href="#Write_Here">Write_Here</a></li>
 <li><a href="#Write_Here">Write_Here</a></li>
 <li><a href="#Write_Here">Write_Here</a></li>
 
@@ -16,13 +35,13 @@
 input().replace(' ', '_')
 ```
 
-     Customer Who Visited but Did Not Make Any Transactions
+     Rising Temperature
     
 
 
 
 
-    'Customer_Who_Visited_but_Did_Not_Make_Any_Transactions'
+    'Rising_Temperature'
 
 
 
@@ -111,6 +130,27 @@ WHERE t.visit_id IS NULL
 GROUP BY customer_id
 ```
 
+<a id='Rising_Temperature'></a>
+# Rising_Temperature
+
+```sql
+/* Write your T-SQL query statement below */
+SELECT w1.id
+FROM Weather w1
+CROSS JOIN Weather w2
+WHERE w1.temperature > w2.temperature AND DATEDIFF(DAY, w2.recordDate, w1.recordDate) = 1
+```
+
+```sql
+/* Write your T-SQL query statement below */
+SELECT id
+FROM (SELECT id, recordDate, temperature, LAG(temperature) OVER(ORDER BY recordDate) AS pre_temp,
+      LAG(recordDate) OVER(ORDER BY recordDate) AS pre_date
+FROM Weather) t2
+WHERE temperature > pre_temp AND DATEDIFF(DAY, pre_date, recordDate) = 1
+
+```
+
 
 ```python
 <a id='Refer_to'></a>
@@ -127,6 +167,87 @@ GROUP BY customer_id
 # Refer_to
 ```
 
+
+```python
 ```sql
 
+```
+```
+
+
+```python
+<a id='Refer_to'></a>
+# Refer_to
+```
+
+
+```python
+```sql
+
+```
+```
+
+
+```python
+<a id='Refer_to'></a>
+# Refer_to
+```
+
+
+```python
+```sql
+
+```
+```
+
+
+```python
+<a id='Refer_to'></a>
+# Refer_to
+```
+
+
+```python
+```sql
+
+```
+```
+
+
+```python
+<a id='Refer_to'></a>
+# Refer_to
+```
+
+
+```python
+```sql
+
+```
+```
+
+
+```python
+<a id='Refer_to'></a>
+# Refer_to
+```
+
+
+```python
+```sql
+
+```
+```
+
+
+```python
+<a id='Refer_to'></a>
+# Refer_to
+```
+
+
+```python
+```sql
+
+```
 ```
