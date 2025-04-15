@@ -10,12 +10,12 @@
 <li><a href="#Customer_Who_Visited_but_Did_Not_Make_Any_Transactions">Customer_Who_Visited_but_Did_Not_Make_Any_Transactions</a></li>
 <li><a href="#Rising_Temperature">Rising_Temperature</a></li>
 <li><a href="#Average_Time_of_Process_per_Machine">Average_Time_of_Process_per_Machine</a></li>
-<li><a href="#Write_Here">Write_Here</a></li>
-<li><a href="#Write_Here">Write_Here</a></li>
-<li><a href="#Write_Here">Write_Here</a></li>
-<li><a href="#Write_Here">Write_Here</a></li>
-<li><a href="#Write_Here">Write_Here</a></li>
-<li><a href="#Write_Here">Write_Here</a></li>
+<li><a href="#Employee_Bonus">Employee_Bonus</a></li>
+<li><a href="#Students_and_Examinations">Students_and_Examinations</a></li>
+<li><a href="#Managers_with_at_Least_5_Direct_Reports">Managers_with_at_Least_5_Direct_Reports</a></li>
+<li><a href="#Confirmation_Rate">Confirmation_Rate</a></li>
+<li><a href="#Not_Boring_Movies">Not_Boring_Movies</a></li>
+<li><a href="#Average_Selling_Price">Average_Selling_Price</a></li>
 <li><a href="#Write_Here">Write_Here</a></li>
 <li><a href="#Write_Here">Write_Here</a></li>
 <li><a href="#Write_Here">Write_Here</a></li>
@@ -35,13 +35,13 @@
 input().replace(' ', '_')
 ```
 
-     Average Time of Process per Machine
+     Average Selling Price
     
 
 
 
 
-    'Average_Time_of_Process_per_Machine'
+    'Average_Selling_Price'
 
 
 
@@ -166,82 +166,87 @@ WHERE a1.machine_id = a2.machine_id
 GROUP BY a1.machine_id
 ```
 
+<a id='Employee_Bonus'></a>
+# Employee_Bonus
 
-```python
-<a id='Refer_to'></a>
-# Refer_to
-```
-
-
-```python
 ```sql
-
-```
-```
-
-
-```python
-<a id='Refer_to'></a>
-# Refer_to
+/* Write your T-SQL query statement below */
+SELECT name, bonus
+FROM Employee e
+LEFT JOIN Bonus s
+ON e.empId = s.empId
+WHERE bonus < 1000 OR bonus IS NULL
 ```
 
+<a id='Students_and_Examinations'></a>
+# Students_and_Examinations
 
-```python
 ```sql
+/* Write your T-SQL query statement below */
+SELECT Distinct s.student_id, s.student_name, sub.subject_name, COUNT(e.student_id) AS attended_exams
+FROM Students s
+CROSS JOIN Subjects sub
+LEFT JOIN Examinations e
+ON e.student_id = s.student_id AND e.subject_name = sub.subject_name
+GROUP BY s.student_id, s.student_name, sub.subject_name
 
 ```
-```
 
+<a id='Managers_with_at_Least_5_Direct_Reports'></a>
+# Managers_with_at_Least_5_Direct_Reports
 
-```python
-<a id='Refer_to'></a>
-# Refer_to
-```
-
-
-```python
 ```sql
-
-```
-```
-
-
-```python
-<a id='Refer_to'></a>
-# Refer_to
+/* Write your T-SQL query statement below */
+SELECT m.name
+FROM Employee AS e
+INNER JOIN Employee AS m ON e.managerId = m.id
+GROUP BY m.id, m.name
+HAVING COUNT(e.managerId) >= 5;
 ```
 
-
-```python
 ```sql
-
+SELECT name
+FROM (SELECT mang.managerId, COUNT(mang.managerId) AS n_reports
+        FROM Employee mang
+        GROUP BY mang.managerId
+        HAVING COUNT(mang.managerId) >= 5) t1
+INNER JOIN Employee e
+ON t1.managerId = e.id
 ```
-```
 
+<a id='Confirmation_Rate'></a>
+# Confirmation_Rate
 
-```python
-<a id='Refer_to'></a>
-# Refer_to
-```
-
-
-```python
 ```sql
-
-```
-```
-
-
-```python
-<a id='Refer_to'></a>
-# Refer_to
+/* Write your T-SQL query statement below */
+SELECT s.user_id, ROUND(AVG(CASE WHEN c.action = 'confirmed' THEN 1.0 ELSE 0.0 END), 2) AS confirmation_rate
+FROM Signups s
+LEFT JOIN Confirmations c
+ON s.user_id = c.user_id
+GROUP BY s.user_id
 ```
 
+<a id='Not_Boring_Movies'></a>
+# Not_Boring_Movies
 
-```python
 ```sql
-
+/* Write your T-SQL query statement below */
+SELECT id, movie, description, rating
+FROM Cinema
+WHERE id % 2 != 0 AND description != 'boring'
+ORDER BY rating DESC
 ```
+
+<a id='Average_Selling_Price'></a>
+# Average_Selling_Price
+
+```sql
+/* Write your T-SQL query statement below */
+SELECT p.product_id, ISNULL(ROUND(SUM(p.price * u.units) / CAST(SUM(u.units) AS FLOAT), 2), 0) AS average_price
+FROM Prices p
+LEFT JOIN UnitsSold u
+ON p.product_id = u.product_id AND u.purchase_date BETWEEN p.start_date AND p.end_date
+GROUP BY p.product_id
 ```
 
 
