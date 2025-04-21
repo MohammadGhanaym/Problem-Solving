@@ -16,8 +16,8 @@
 <li><a href="#Confirmation_Rate">Confirmation_Rate</a></li>
 <li><a href="#Not_Boring_Movies">Not_Boring_Movies</a></li>
 <li><a href="#Average_Selling_Price">Average_Selling_Price</a></li>
-<li><a href="#Write_Here">Write_Here</a></li>
-<li><a href="#Write_Here">Write_Here</a></li>
+<li><a href="#Project_Employees_I">Project_Employees_I</a></li>
+<li><a href="#Percentage_of_Users_Attended_a_Contest">Percentage_of_Users_Attended_a_Contest</a></li>
 <li><a href="#Write_Here">Write_Here</a></li>
 <li><a href="#Write_Here">Write_Here</a></li>
 <li><a href="#Write_Here">Write_Here</a></li>
@@ -35,13 +35,13 @@
 input().replace(' ', '_')
 ```
 
-     Average Selling Price
+      Percentage of Users Attended a Contest
     
 
 
 
 
-    'Average_Selling_Price'
+    '_Percentage_of_Users_Attended_a_Contest'
 
 
 
@@ -247,6 +247,83 @@ FROM Prices p
 LEFT JOIN UnitsSold u
 ON p.product_id = u.product_id AND u.purchase_date BETWEEN p.start_date AND p.end_date
 GROUP BY p.product_id
+```
+
+<a id='Project_Employees_I'></a>
+# Project_Employees_I
+
+```sql
+/* Write your T-SQL query statement below */
+SELECT project_id, ROUND(AVG(CAST(experience_years AS DECIMAL)), 2) average_years
+FROM Project p
+LEFT JOIN Employee e
+ON p.employee_id = e.employee_id
+GROUP BY project_id
+
+```
+
+<a id='Percentage_of_Users_Attended_a_Contest'></a>
+# Percentage_of_Users_Attended_a_Contest
+
+```sql
+/* Write your T-SQL query statement below */    
+SELECT r.contest_id, 
+       ROUND(100.0 * COUNT(DISTINCT r.user_id) / (SELECT COUNT(*) FROM Users), 2) AS percentage
+FROM Register r
+GROUP BY r.contest_id
+ORDER BY percentage DESC, contest_id;
+```
+
+
+```python
+<a id='Refer_to'></a>
+# Refer_to
+```
+
+
+```python
+```sql
+
+```
+```
+
+
+```python
+<a id='Refer_to'></a>
+# Refer_to
+```
+
+
+```python
+```sql
+
+```
+```
+
+
+```python
+<a id='Refer_to'></a>
+# Refer_to
+```
+
+
+```python
+```sql
+
+```
+```
+
+
+```python
+<a id='Refer_to'></a>
+# Refer_to
+```
+
+
+```python
+```sql
+
+```
 ```
 
 
