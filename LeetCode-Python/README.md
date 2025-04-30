@@ -67,7 +67,7 @@
 <li><a href="#Is_Subsequence">Is_Subsequence</a></li>
 <li><a href="#Length_of_Last_Word">Length_of_Last_Word</a></li>
 <li><a href="#Group_Anagrams">Group_Anagrams</a></li>
-<li><a href="#Write_Here">Write_Here</a></li>
+<li><a href="#Design_HashSet">Design_HashSet</a></li>
 <li><a href="#Write_Here">Write_Here</a></li>
 <li><a href="#Write_Here">Write_Here</a></li>
 <li><a href="#Write_Here">Write_Here</a></li>
@@ -81,13 +81,13 @@
 input().replace(' ', '_')
 ```
 
-     49. Group Anagrams
+     Design HashSet
     
 
 
 
 
-    '49._Group_Anagrams'
+    'Design_HashSet'
 
 
 
@@ -674,6 +674,38 @@ def removeElement(nums, val):
         nums.remove(val)
     return len(nums)
 ```
+
+
+```python
+def removeElement(nums, val) -> int:
+    k = 0
+    for i in range(len(nums)):
+        if nums[i] != val:
+            nums[k] = nums[i]
+            k += 1
+    return k
+```
+
+
+```python
+nums = [3, 2, 2, 3]
+```
+
+
+```python
+print(removeElement(nums, 3))
+nums
+```
+
+    2
+    
+
+
+
+
+    [2, 2, 2, 3]
+
+
 
 <a id='Search Insert Position'></a>
 ### Search Insert Position
@@ -1623,6 +1655,20 @@ def majorityElement(nums: list[int]) -> int:
             num_vote -= 1
             
     return candidate
+```
+
+
+```python
+def majorityElement(nums: list[int]) -> int:
+    count = {}
+    maxCount = res = 0
+    for num in nums:
+        count[num] = count.get(num, 0) + 1
+        if maxCount < count[num]:
+            res = num
+            maxCount = count[num]
+            
+    return res
 ```
 
 <a id='Excel_Sheet_Column_Number'></a>
@@ -3199,15 +3245,84 @@ groupAnagrams(strs)
 
 
 
+<a id='Design_HashSet'></a>
+### Design_HashSet
+
 
 ```python
+class MyHashSet:
 
+    def __init__(self):
+        self.hashSet = []
+
+    def add(self, key: int) -> None:
+        if not self.contains(key):
+            self.hashSet.append(key)
+
+    def remove(self, key: int) -> None:
+        if self.contains(key):
+            self.hashSet.remove(key)
+
+    def contains(self, key: int) -> bool:
+        return key in self.hashSet
+
+
+# Your MyHashSet object will be instantiated and called as such:
+# obj = MyHashSet()
+# obj.add(key)
+# obj.remove(key)
+# param_3 = obj.contains(key)
 ```
 
 
 ```python
-<a id='Refer_to'></a>
-### Refer_to
+class ListNode:
+    def __init__(self, key):
+        self.key = key
+        self.next = None
+
+class MyHashSet:
+
+    def __init__(self):
+        self.hashSet = [ListNode(0) for i in range(10**4)]
+
+    def add(self, key: int) -> None:
+        cur = self.hashSet[key % len(self.hashSet)]
+
+        while cur.next:
+            if cur.next.key == key:
+                return
+            cur = cur.next
+            
+        cur.next = ListNode(key)
+
+    def remove(self, key: int) -> None:
+        cur = self.hashSet[key % len(self.hashSet)]
+
+        while cur.next:
+            if cur.next.key == key:
+                cur.next = cur.next.next
+                return
+            cur = cur.next
+            
+        
+
+    def contains(self, key: int) -> bool:
+        cur = self.hashSet[key % len(self.hashSet)]
+
+        while cur.next:
+            if cur.next.key == key:
+                return True
+            cur = cur.next
+            
+        return False
+
+
+# Your MyHashSet object will be instantiated and called as such:
+# obj = MyHashSet()
+# obj.add(key)
+# obj.remove(key)
+# param_3 = obj.contains(key)
 ```
 
 
