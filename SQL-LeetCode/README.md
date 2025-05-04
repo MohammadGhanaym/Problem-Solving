@@ -18,9 +18,9 @@
 <li><a href="#Average_Selling_Price">Average_Selling_Price</a></li>
 <li><a href="#Project_Employees_I">Project_Employees_I</a></li>
 <li><a href="#Percentage_of_Users_Attended_a_Contest">Percentage_of_Users_Attended_a_Contest</a></li>
-<li><a href="#Write_Here">Write_Here</a></li>
-<li><a href="#Write_Here">Write_Here</a></li>
-<li><a href="#Write_Here">Write_Here</a></li>
+<li><a href="#Queries_Quality_and_Percentage">Queries_Quality_and_Percentage</a></li>
+<li><a href="#Monthly_Transactions_I">Monthly_Transactions_I</a></li>
+<li><a href="#Immediate_Food_Delivery_II">Immediate_Food_Delivery_II</a></li>
 <li><a href="#Write_Here">Write_Here</a></li>
 <li><a href="#Write_Here">Write_Here</a></li>
 <li><a href="#Write_Here">Write_Here</a></li>
@@ -35,13 +35,13 @@
 input().replace(' ', '_')
 ```
 
-      Percentage of Users Attended a Contest
+     Immediate Food Delivery II
     
 
 
 
 
-    '_Percentage_of_Users_Attended_a_Contest'
+    'Immediate_Food_Delivery_II'
 
 
 
@@ -272,6 +272,49 @@ SELECT r.contest_id,
 FROM Register r
 GROUP BY r.contest_id
 ORDER BY percentage DESC, contest_id;
+```
+
+<a id='Queries_Quality_and_Percentage'></a>
+# Queries_Quality_and_Percentage
+
+```sql
+/* Write your T-SQL query statement below */
+SELECT 
+    query_name, 
+    ROUND(AVG(1.0 * rating / position), 2) AS quality, 
+    ROUND(AVG(CASE WHEN rating < 3 THEN 1.0 ELSE 0.0 END) * 100, 2) AS poor_query_percentage
+FROM Queries
+GROUP BY query_name
+```
+
+<a id='Monthly_Transactions_I'></a>
+# Monthly_Transactions_I
+
+```sql
+/* Write your T-SQL query statement below */
+SELECT 
+    FORMAT(trans_date, 'yyyy-MM') AS month, 
+    country, 
+    COUNT(id) AS trans_count, 
+    SUM(CASE WHEN state = 'approved' THEN 1 ELSE 0 END) AS approved_count,
+    SUM(amount) AS trans_total_amount,
+    SUM(CASE WHEN state = 'approved' THEN amount ELSE 0 END) AS approved_total_amount
+FROM Transactions
+GROUP BY FORMAT(trans_date, 'yyyy-MM'), country
+```
+
+<a id='Immediate_Food_Delivery_II'></a>
+# Immediate_Food_Delivery_II
+
+```sql
+/* Write your T-SQL query statement below */
+SELECT 
+    ROUND(AVG(CASE WHEN d1.order_date = d1.customer_pref_delivery_date THEN 1.0 ELSE 0.0 END) * 100, 2) AS immediate_percentage
+FROM Delivery d1
+INNER JOIN (SELECT customer_id, MIN(order_date) AS first_order
+            FROM Delivery
+            GROUP BY customer_id) d2
+ON d1.customer_id = d2.customer_id AND d1.order_date = d2.first_order
 ```
 
 
