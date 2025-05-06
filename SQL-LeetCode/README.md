@@ -21,7 +21,7 @@
 <li><a href="#Queries_Quality_and_Percentage">Queries_Quality_and_Percentage</a></li>
 <li><a href="#Monthly_Transactions_I">Monthly_Transactions_I</a></li>
 <li><a href="#Immediate_Food_Delivery_II">Immediate_Food_Delivery_II</a></li>
-<li><a href="#Write_Here">Write_Here</a></li>
+<li><a href="#Game_Play_Analysis_IV">Game_Play_Analysis_IV</a></li>
 <li><a href="#Write_Here">Write_Here</a></li>
 <li><a href="#Write_Here">Write_Here</a></li>
 <li><a href="#Write_Here">Write_Here</a></li>
@@ -35,13 +35,13 @@
 input().replace(' ', '_')
 ```
 
-     Immediate Food Delivery II
+     Game Play Analysis IV
     
 
 
 
 
-    'Immediate_Food_Delivery_II'
+    'Game_Play_Analysis_IV'
 
 
 
@@ -317,17 +317,23 @@ INNER JOIN (SELECT customer_id, MIN(order_date) AS first_order
 ON d1.customer_id = d2.customer_id AND d1.order_date = d2.first_order
 ```
 
+<a id='Game_Play_Analysis_IV'></a>
+# Game_Play_Analysis_IV
 
-```python
-<a id='Refer_to'></a>
-# Refer_to
-```
-
-
-```python
 ```sql
-
-```
+/* Write your T-SQL query statement below */
+SELECT 
+    ROUND(
+        SUM(
+        CASE WHEN DATEDIFF(DAY, a2.first_date, a1.event_date) = 1 
+        THEN 1.0 ELSE 0.0 END
+            ) / COUNT(DISTINCT a1.player_id),
+        2) AS fraction
+FROM Activity a1
+INNER JOIN (SELECT player_id, MIN(event_date) first_date
+            FROM Activity
+            GROUP BY player_id) a2
+ON a1.player_id = a2.player_id
 ```
 
 
