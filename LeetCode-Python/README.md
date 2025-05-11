@@ -68,7 +68,7 @@
 <li><a href="#Length_of_Last_Word">Length_of_Last_Word</a></li>
 <li><a href="#Group_Anagrams">Group_Anagrams</a></li>
 <li><a href="#Design_HashSet">Design_HashSet</a></li>
-<li><a href="#Write_Here">Write_Here</a></li>
+<li><a href="#Design_HashMap">Design_HashMap</a></li>
 <li><a href="#Write_Here">Write_Here</a></li>
 <li><a href="#Write_Here">Write_Here</a></li>
 <li><a href="#Write_Here">Write_Here</a></li>
@@ -81,13 +81,13 @@
 input().replace(' ', '_')
 ```
 
-     Design HashSet
+     Design HashMap
     
 
 
 
 
-    'Design_HashSet'
+    'Design_HashMap'
 
 
 
@@ -3325,10 +3325,58 @@ class MyHashSet:
 # param_3 = obj.contains(key)
 ```
 
+<a id='Design_HashMap'></a>
+### Design_HashMap
+
 
 ```python
-<a id='Refer_to'></a>
-### Refer_to
+class ListNode:
+    def __init__(self, key=-1, val=-1, next = None):
+        self.key=key
+        self.val = val
+        self.next = next
+        
+class MyHashMap:
+
+    def __init__(self):
+        self.map = [ListNode() for _ in range(1000)]
+        
+    def hash(self, key):
+        return key % len(self.map)
+        
+    def put(self, key: int, value: int) -> None:
+        cur = self.map[self.hash(key)]
+        while cur.next:
+            if cur.next.key == key:
+                cur.next.val = value
+                return
+            cur = cur.next
+        cur.next = ListNode(key, value)
+            
+    def get(self, key: int) -> int:
+        cur = self.map[self.hash(key)].next
+        while cur:
+            if cur.key == key:
+                return cur.val
+            cur = cur.next
+        return -1
+            
+
+    def remove(self, key: int) -> None:
+        cur = self.map[self.hash(key)]
+        while cur and cur.next:
+            if cur.next.key == key:
+                cur.next = cur.next.next
+                return
+            cur = cur.next
+        
+
+
+# Your MyHashMap object will be instantiated and called as such:
+# obj = MyHashMap()
+# obj.put(key,value)
+# param_2 = obj.get(key)
+# obj.remove(key)
 ```
 
 
