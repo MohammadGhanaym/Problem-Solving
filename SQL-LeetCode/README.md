@@ -22,10 +22,18 @@
 <li><a href="#Monthly_Transactions_I">Monthly_Transactions_I</a></li>
 <li><a href="#Immediate_Food_Delivery_II">Immediate_Food_Delivery_II</a></li>
 <li><a href="#Game_Play_Analysis_IV">Game_Play_Analysis_IV</a></li>
-<li><a href="#Write_Here">Write_Here</a></li>
-<li><a href="#Write_Here">Write_Here</a></li>
-<li><a href="#Write_Here">Write_Here</a></li>
-<li><a href="#Write_Here">Write_Here</a></li>
+<li><a href="#Number_of_Unique_Subjects_Taught_by_Each_Teacher">Number_of_Unique_Subjects_Taught_by_Each_Teacher</a></li>
+<li><a href="#User_Activity_for_the_Past_30_Days_I">User_Activity_for_the_Past_30_Days_I</a></li>
+<li><a href="#Classes_With_at_Least_5_Students">Classes_With_at_Least_5_Students</a></li>
+<li><a href="#Biggest_Single_Number">Biggest_Single_Number</a></li>
+<li><a href="#Customers_Who_Bought_All_Products">Customers_Who_Bought_All_Products</a></li>
+<li><a href="#The_Number_of_Employees_Which_Report_to_Each_Employee">The_Number_of_Employees_Which_Report_to_Each_Employee</a></li>
+<li><a href="#Primary_Department_for_Each_Employee">Primary_Department_for_Each_Employee</a></li>
+<li><a href="#Triangle_Judgement">Triangle_Judgement</a></li>
+<li><a href="#Consecutive_Numbers">Consecutive_Numbers</a></li>
+<li><a href="#Product_Price_at_a_Given_Date">Product_Price_at_a_Given_Date</a></li>
+<li><a href="#Last_Person_to_Fit_in_the_Bus">Last_Person_to_Fit_in_the_Bus</a></li>
+<li><a href="#Count_Salary_Categories">Count_Salary_Categories</a></li>
 <li><a href="#Write_Here">Write_Here</a></li>
 <li><a href="#Write_Here">Write_Here</a></li>
 <li><a href="#Write_Here">Write_Here</a></li>
@@ -35,13 +43,13 @@
 input().replace(' ', '_')
 ```
 
-     Game Play Analysis IV
+     Count Salary Categories
     
 
 
 
 
-    'Game_Play_Analysis_IV'
+    'Count_Salary_Categories'
 
 
 
@@ -336,30 +344,209 @@ INNER JOIN (SELECT player_id, MIN(event_date) first_date
 ON a1.player_id = a2.player_id
 ```
 
+<a id='Number_of_Unique_Subjects_Taught_by_Each_Teacher'></a>
+# Number_of_Unique_Subjects_Taught_by_Each_Teacher
 
-```python
-<a id='Refer_to'></a>
-# Refer_to
-```
-
-
-```python
 ```sql
-
-```
-```
-
-
-```python
-<a id='Refer_to'></a>
-# Refer_to
+/* Write your T-SQL query statement below */
+SELECT teacher_id, COUNT(DISTINCT subject_id) cnt
+FROM Teacher
+GROUP BY teacher_id
 ```
 
+<a id='User_Activity_for_the_Past_30_Days_I'></a>
+# User_Activity_for_the_Past_30_Days_I
 
-```python
 ```sql
+/* Write your T-SQL query statement below */
+SELECT activity_date day, COUNT(DISTINCT user_id) active_users
+FROM Activity
+WHERE activity_date > DATEADD(DAY, -30, '2019-07-27') 
+AND activity_date <= '2019-07-27'
+GROUP BY activity_date
 
 ```
+
+<a id='Product Sales Analysis III'></a>
+# Product Sales Analysis III
+
+```sql
+/* Write your T-SQL query statement below */
+SELECT S.product_id, T.first_year, S.quantity, S.price
+FROM Sales S
+INNER JOIN
+        (SELECT product_id, MIN(year) first_year
+        FROM Sales
+        GROUP BY product_id) T
+ON S.product_id = T.product_id
+WHERE T.first_year = S.year
+```
+
+<a id='Classes_With_at_Least_5_Students'></a>
+# Classes_With_at_Least_5_Students
+
+```sql
+/* Write your T-SQL query statement below */
+SELECT class
+FROM courses
+GROUP BY class
+HAVING COUNT(student) >= 5
+```
+
+<a id='Find_Followers_Count'></a>
+# Find_Followers_Count
+
+```sql
+/* Write your T-SQL query statement below */
+SELECT user_id, COUNT(*) followers_count
+FROM Followers
+GROUP BY user_id
+ORDER BY user_id
+```
+
+<a id='Biggest_Single_Number'></a>
+# Biggest_Single_Number
+
+```sql
+/* Write your T-SQL query statement below */
+
+SELECT TOP(1) t2.num
+FROM MyNumbers t1
+LEFT JOIN
+(
+    SELECT num, COUNT(*) n_count
+    FROM MyNumbers
+    GROUP BY num
+    HAVING COUNT(*) = 1
+) t2
+ON t1.num = t2.num
+ORDER BY t2.num DESC
+```
+
+<a id='Customers_Who_Bought_All_Products'></a>
+# Customers_Who_Bought_All_Products
+
+```sql
+SELECT customer_id
+FROM Customer
+GROUP BY customer_id
+HAVING COUNT(DISTINCT product_key) = (SELECT COUNT(*) FROM Product)
+```
+
+<a id='The_Number_of_Employees_Which_Report_to_Each_Employee'></a>
+# The_Number_of_Employees_Which_Report_to_Each_Employee
+
+```sql
+SELECT employee_id, name, reports_count, average_age
+FROM Employees e
+INNER JOIN (
+            SELECT reports_to, COUNT(*) AS reports_count, ROUND(AVG(age * 1.0), 0) average_age
+            FROM Employees
+            WHERE reports_to IS NOT NULL
+            GROUP BY reports_to
+            ) m
+ON e.employee_id = m.reports_to
+```
+
+<a id='Primary_Department_for_Each_Employee'></a>
+# Primary_Department_for_Each_Employee
+
+```sql
+/* Write your T-SQL query statement below */
+SELECT employee_id, department_id
+FROM Employee e1
+WHERE primary_flag = 'Y' 
+        OR employee_id IN (
+                            SELECT employee_id
+                            FROM Employee
+                            GROUP BY employee_id
+                            HAVING COUNT(employee_id) = 1)
+```
+
+<a id='Triangle_Judgement'></a>
+# Triangle_Judgement
+
+```sql
+SELECT x, y, z,
+    CASE WHEN ((x + y > z) AND (x + z > y) AND (y + z > x)) THEN 'Yes' ELSE 'No' END AS triangle
+FROM Triangle
+```
+
+<a id='Consecutive_Numbers'></a>
+# Consecutive_Numbers
+
+```sql
+/* Write your T-SQL query statement below */
+SELECT DISTINCT num AS ConsecutiveNums 
+FROM (SELECT num,
+        CASE WHEN (num = LEAD(num, 1) OVER(ORDER BY id)) AND 
+                  (num = LEAD(num, 2) OVER(ORDER BY id)) THEN 1 ELSE 0 END AS mark_3
+        FROM Logs) t
+WHERE mark_3 = 1
+```
+
+<a id='Product_Price_at_a_Given_Date'></a>
+# Product_Price_at_a_Given_Date
+
+```sql
+SELECT DISTINCT p3.product_id, CASE WHEN p4.new_price IS NULL THEN 10 ELSE p4.new_price END price
+FROM Products p3
+LEFT JOIN (SELECT p1.product_id, new_price
+            FROM Products p1
+            INNER JOIN (SELECT product_id, MAX(change_date) last_change_date
+                        FROM Products
+                        WHERE change_date <= '2019-08-16'
+                        GROUP BY product_id) p2
+            ON p1.product_id = p2.product_id AND change_date = last_change_date) p4
+ON p3.product_id = p4.product_id
+```
+
+##### Another Solution
+```sql
+SELECT product_id,
+    FIRST_VALUE(new_price) OVER(PARTITION BY product_id ORDER BY change_date DESC) AS price
+FROM Products
+WHERE change_date <= '2019-08-16'
+UNION
+SELECT product_id, 10 AS price
+FROM Products
+GROUP BY product_id
+HAVING MIN(change_date) > '2019-08-16'
+```
+
+<a id='Last_Person_to_Fit_in_the_Bus'></a>
+# Last_Person_to_Fit_in_the_Bus
+
+```sql
+WITH ranked AS (SELECT person_id, person_name, weight, turn,
+                    SUM(weight) OVER(ORDER BY turn) total_weight
+                FROM [Queue])
+
+SELECT TOP(1) person_name
+FROM ranked
+WHERE total_weight <= 1000
+ORDER BY total_weight DESC
+```
+
+<a id='Count_Salary_Categories'></a>
+# Count_Salary_Categories
+
+```sql
+/* Write your T-SQL query statement below */
+WITH accounts_cat AS (
+    SELECT account_id, income, CASE WHEN income < 20000
+        THEN 'Low Salary'
+        WHEN income BETWEEN 20000 AND 50000
+        THEN 'Average Salary'
+        ELSE 'High Salary' END AS category
+    FROM accounts
+)
+
+SELECT b.category, COUNT(account_id) accounts_count
+FROM accounts_cat ac
+RIGHT JOIN (VALUES('Low Salary'), ('High Salary'), ('Average Salary')) AS b(category)
+ON ac.category = b.category
+GROUP BY b.category
 ```
 
 
