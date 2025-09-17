@@ -34,6 +34,14 @@
 <li><a href="#Product_Price_at_a_Given_Date">Product_Price_at_a_Given_Date</a></li>
 <li><a href="#Last_Person_to_Fit_in_the_Bus">Last_Person_to_Fit_in_the_Bus</a></li>
 <li><a href="#Count_Salary_Categories">Count_Salary_Categories</a></li>
+<li><a href="#Employees_Whose_Manager_Left_the_Company">Employees_Whose_Manager_Left_the_Company</a></li>
+<li><a href="#Exchange_Seats">Exchange_Seats</a></li>
+<li><a href="#Write_Here">Write_Here</a></li>
+<li><a href="#Write_Here">Write_Here</a></li>
+<li><a href="#Write_Here">Write_Here</a></li>
+<li><a href="#Write_Here">Write_Here</a></li>
+<li><a href="#Write_Here">Write_Here</a></li>
+<li><a href="#Write_Here">Write_Here</a></li>
 <li><a href="#Write_Here">Write_Here</a></li>
 <li><a href="#Write_Here">Write_Here</a></li>
 <li><a href="#Write_Here">Write_Here</a></li>
@@ -43,13 +51,13 @@
 input().replace(' ', '_')
 ```
 
-     Count Salary Categories
+     Exchange Seats
     
 
 
 
 
-    'Count_Salary_Categories'
+    'Exchange_Seats'
 
 
 
@@ -547,6 +555,33 @@ FROM accounts_cat ac
 RIGHT JOIN (VALUES('Low Salary'), ('High Salary'), ('Average Salary')) AS b(category)
 ON ac.category = b.category
 GROUP BY b.category
+```
+
+<a id='Employees_Whose_Manager_Left_the_Company'></a>
+# Employees_Whose_Manager_Left_the_Company
+
+```sql
+/* Write your T-SQL query statement below */
+SELECT employee_id
+FROM Employees
+WHERE salary < 30000 AND manager_id IS NOT NULL
+AND manager_id NOT IN (SELECT employee_id FROM Employees)
+ORDER BY employee_id
+```
+
+<a id='Exchange_Seats'></a>
+# Exchange_Seats
+
+```sql
+/* Write your T-SQL query statement below */
+SELECT id,
+    ISNULL(
+        CASE WHEN id % 2 = 1
+        THEN LEAD(student) OVER(ORDER BY id)
+        ELSE LAG(student) OVER(ORDER BY id) END,
+        student
+    ) AS student
+FROM Seat
 ```
 
 
